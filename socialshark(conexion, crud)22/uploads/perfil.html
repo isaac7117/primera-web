@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+    <link rel="icon" href="../uploads/LogoTib.png">
+    <link rel="stylesheet" href="../uploads/perfil.css">
+</head>
+<body>
+    <h1>Perfil de Usuario</h1>
+    {% if usuario %}
+        <p>Correo electrónico: {{ email }}</p>
+        <p>Nombre de usuario: {{ usuario.get('username') }}</p>
+        {% if usuario.get('foto_perfil') %}
+            <!-- Asegúrate de que la ruta de la imagen sea correcta -->
+            <img src="{{ url_for('mostrar_perfil', nombre_foto=usuario.foto_perfil) }}" alt="Foto de perfil">
+        {% else %}
+            <p>No has subido una foto de perfil.</p>
+        {% endif %}
+        
+        <!-- Formulario para subir una nueva foto de perfil -->
+        <form action="/perfil" method="post" enctype="multipart/form-data">
+            <input type="file" name="foto_perfil"><br>
+            <button type="submit">Subir foto de perfil</button>
+        </form>
+    {% endif %}
+</body>
+</html>

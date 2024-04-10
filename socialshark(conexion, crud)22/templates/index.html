@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../uploads/LogoTib.png">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialShark</title>
+    <link rel="stylesheet" href="../uploads/index.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-left">
+            <p>SocialShark</p>
+            <img src="../uploads/UtaL.png" class="logo">
+            <img src="../uploads/LogoTib.png" class="logo1">
+            <ul>
+                <li><img src="../uploads/notificacion.png"></li>
+                <li><img src="../uploads/email.png"></li>
+                <li><img src="../uploads/videos.png"></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <div class="search-box">
+                <img src="../uploads/Buscar.png" alt="">
+                <input type="text" placeholder="Buscar">
+            </div>
+            <div class="nav-user-icon online" onclick="settingsMenuToggle()">
+                <img src="../uploads/Foto perfil.jpg">
+            </div>
+        </div>
+        <!-- Settings Menu -->
+        <div class="settings-menu">
+            <div id="dark-btn">
+                <span></span>
+            </div>
+            <div class="settings-menu-inner">
+                <div class="user-profile">
+                    <img src="../uploads/Foto perfil.jpg">
+                    <div>
+                        <p>{{ nombre_de_usuario }}</p>
+                        <a href="{{ url_for('retornar_a_perfil') }}">See your profile</a>
+                    </div>
+                </div>
+                <hr>
+                <div class="user-profile">
+                    <img src="#">
+                    <div>
+                        <p>Give Feedback</p>
+                        <a href="#">Help us to improve the new design</a>
+                    </div>
+                </div>
+                <hr>
+                <div class="settings-links">
+                    <img src="#" class="settings-icon">
+                    <a href="#">Settings & Privacy <img src="" width="10px"></a>
+                </div>
+                <div class="settings-links">
+                    <img src="#" class="settings-icon">
+                    <a href="#">Help & Support <img src="" width="10px"></a>
+                </div>
+                <div class="settings-links">
+                    <img src="#" class="settings-icon">
+                    <a href="#">Display & Accessibility<img src="" width="10px"></a>
+                </div>
+            </div>
+        </div>
+        <!-- End of Settings Menu -->
+    </nav>
+
+    <div class="container">
+        <!-- Left Sidebar -->
+        <div class="left-sidebar">
+            <div class="imp-links">
+                <a href="#"><img src="../uploads/Nueva noticia.png">Home</a>
+                <a href="#"><img src="../uploads/Agregar amigo.png">Friends</a>
+                <a href="#"><img src="../uploads/Grupos.png">Group</a>
+                <a href="#"><img src="../uploads/Marketplace.png">Marketplace</a>
+                <a href="#"><img src="../uploads/Video.png">Watch</a>
+                <a href="#">See More</a>
+            </div>
+            <div class="shortcut-links">
+                <p>Your Shortcuts</p>
+                <a href="#"><img src="">Web Developers</a>
+                <a href="#"><img src="">Web Design course</a>
+                <a href="#"><img src="">Full Stack Developer</a>
+                <a href="#"><img src="">Website Experts</a>
+            </div>
+        </div>
+        <!-- End of Left Sidebar -->
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="story-gallery">
+                <div class="story story1">
+                    <img src="../uploads/agregar.png">
+                    <p>Post Story</p>
+                </div>
+                <div class="story story2">
+                    <img src="#">
+                    <p>Alison</p>
+                </div>
+                <div class="story story3">
+                    <img src="#">
+                    <p>Jackson</p>
+                </div>
+                <div class="story story4">
+                    <img src="#">
+                    <p>Julieth</p>
+                </div>
+                <div class="story story5">
+                    <img src="#">
+                    <p>Jessy</p>
+                </div>
+            </div>
+
+            <div class="write-post-container">
+                <div class="user-profile">
+                    <img src="../uploads/Foto perfil.jpg">
+                    <div>
+                        <p>{{ username }}</p>
+                        <small>Public<i class='bx bxs-chevron-down'></i></small>
+                    </div>
+                </div>
+
+                <div class="post-input-container">
+                    <form id="formulario-publicacion" method="POST" action="/publicaciones" enctype="multipart/form-data">
+                        <textarea type="text" id="titulo" name="titulo" placeholder="Titulo"></textarea>
+                        <textarea rows="3" id="contenido" name="contenido" placeholder="Descripción"></textarea>
+                        <div class="add-post-links">
+                            <label for="live-video"><img src="../uploads/Videorojo.png">Live Video</label>
+                            <input type="file" accept="video/*" id="live-video" style="display: none;">
+                            <label for="photo-video"><img src="../uploads/Camera.png">Photo/Video</label>
+                            <input type="file" id="photo-video" name="imagen" style="display: none;">
+                            <input type="radio" id="feeling-activity" class="feeling-activity" name="feeling" style="display: none;">
+                            <label for="feeling-activity"><img src="../uploads/Carafeliz.png">Feeling/Activity</label>
+                            <button class="" type="submit">Publicar</button>
+                            <div class="feeling-list">
+                                <ul>
+                                    <li><label for="happy">Happy</label><input type="radio" id="happy" name="feeling"></li>
+                                    <li><label for="sad">Sad</label><input type="radio" id="sad" name="feeling"></li>
+                                    <li><label for="angry">Angry</label><input type="radio" id="angry" name="feeling"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            {% for publicacion in publicaciones[::-1] %}
+    <div class="post-container" id="publicaciones">
+        <div class="post-row">
+            <div class="user-profile">
+                <img src="../uploads/Foto perfil.jpg">
+                {{ publicacion.titulo }}
+            </div>
+            <div class="options-menu">
+                <button class="options-menu-btn" onclick="toggleOptionsMenu('{{ publicacion._id }}')">...</button>
+                <div class="options-menu-content" id="options-menu-{{ publicacion._id }}" style="display: none;">
+                    <button onclick="mostrarFormulario('{{ publicacion._id }}')">Editar</button>
+                    <button onclick="eliminarPublicacion('{{ publicacion._id }}')">Eliminar</button>
+                </div>
+            </div>
+        </div>
+        <p class="post-text">{{ publicacion.contenido }}</p>
+        {% if publicacion.imagen %}
+        <img src="{{ url_for('uploaded_file', filename=publicacion.imagen) }}" class="post-img" alt="Imagen">
+        {% endif %}
+        <div class="post-row">
+            <div class="activity-icons">
+                <div><img src="../uploads/Likej.png">120</div>
+                <div><img src="../uploads/conversa.png">45</div>
+                <div><img src="../uploads/Compartir.png">20</div>
+            </div>
+        </div>
+        <!-- Formulario de edición oculto -->
+        <form id="form_{{ publicacion._id }}" action="/publicaciones/{{ publicacion._id }}" method="POST" style="display: none;">
+            <input type="hidden" name="_method" value="PUT">
+            <input type="text" name="titulo" value="{{ publicacion.titulo }}">
+            <textarea name="contenido">{{ publicacion.contenido }}</textarea>
+            <button type="submit">Guardar</button>
+        </form>
+    </div>
+    {% endfor %}s
+
+            <button type="button" class="load-more-btn">Load More</button>
+        </div>
+
+        <div class="right-sidebar">
+            <div class="sidebar-title">
+                <h4>Events</h4>
+                <a href="#">See All</a>
+            </div>
+
+            <div class="event">
+                <div class="left-event">
+                    <h3>18</h3>
+                    <span>March</span>
+                </div>
+
+                <div class="right-event">
+                    <h4>Social Media</h4>
+                    <p><i class='bx bx-map'></i>Willson Tech Park</p>
+                    <a href="#">More Info</a>
+                </div>
+            </div>
+            <div class="event">
+                <div class="left-event">
+                    <h3>22</h3>
+                    <span>June</span>
+                </div>
+                <div class="right-event">
+                    <h4>Mobile Marketing</h4>
+                    <p><i class='bx bx-map'></i>Willson Tech Park</p>
+                    <a href="#">More Info</a>
+                </div>
+            </div>
+            <div class="sidebar-title">
+                <h4>Advertisement</h4>
+                <a href="#">Close</a>
+            </div>
+            <img src="#" class="sidebar-ads">
+            <div class="sidebar-title">
+                <h4>Conversation</h4>
+                <a href="#">Hide Chat</a>
+            </div>
+            <div class="online-list">
+                <div class="online">
+                    <img src="#">
+                </div>
+                <p>Alison Mina</p>
+            </div>
+            <div class="online-list">
+                <div class="online">
+                    <img src="#">
+                </div>
+                <p>Jackson David</p>
+            </div>
+            <div class="online-list">
+                <div class="online">
+                    <img src="#">
+                </div>
+                <p>Alina Garcia</p>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="footer">
+        <p>Copyright 2024 - Easy Tutorials Youtube Channel</p>
+    </div>
+
+    <script>
+        // Función para mostrar u ocultar el menú desplegable
+        function toggleOptionsMenu(id) {
+            var menu = document.getElementById('options-menu-' + id);
+            if (menu.style.display === 'block') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'block';
+            }
+        }
+
+        // Función para mostrar el formulario de edición
+        function mostrarFormulario(id) {
+            document.getElementById('form_' + id).style.display = 'block';
+        }
+
+        // Función para eliminar la publicación
+        function eliminarPublicacion(id) {
+            // Enviar solicitud al servidor para eliminar la publicación
+            fetch('/publicaciones/' + id, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Si la eliminación fue exitosa, recargar la página para actualizar la lista de publicaciones
+                    location.reload();
+                } else {
+                    console.error('Error al eliminar la publicación');
+                }
+            })
+            .catch(error => console.error('Error al eliminar la publicación:', error));
+        }
+    </script>
+</body>
+</html>

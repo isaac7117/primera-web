@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../templates/static/css/registro.css">
+    <link rel="icon" href="../templates/static/img/LogoTib.png">
+    <title>Login</title>
+</head>
+<body>
+    <div class="container-form">
+        <div class="information">
+            <div class="info-childs">
+                <h2>Bienvenido</h2>
+                <div class="contenedor">
+                    <img src="../templates/static/img/UtaL.png" class="img-log" style="background-size: cover;">
+                    <img src="../templates/static/img/LogoTib.png" class="img-fluid">
+                </div>
+                <p>Para unirte a nuestra comunidad por favor Inicia Sesion con tus datos</p>
+                <a href="../templates/inicio.html">
+                    <input type="button" value="Iniciar Sesion">
+                </a>
+            </div>
+        </div>
+        <div class="form-information">
+            <div class="form-information-childs">
+                <h2>Crear una cuenta</h2>
+                <div class="icons">
+                    <i class='bx bxl-google'></i>
+                    <i class='bx bxl-gmail' ></i>
+                    <i class='bx bxl-facebook-circle'></i>
+                </div>
+                <p>O usa gmail para registrarte</p>
+                <form action="/registro" method="post">
+                    <label>
+                        <i class='bx bx-user' ></i>
+                        <input type="text" name="username" placeholder="Nombre completo">
+                    </label>
+                    <label>
+                        <i class='bx bxl-gmail' ></i>
+                        <input type="email" name="email" placeholder="Correo electronico">
+                    </label>
+                    <label>
+                        <i class='bx bx-lock-alt' ></i>
+                        <input type="password" name="password" placeholder="Contraseña">
+                    </label>
+                    <input type="submit" value="Ragistrarse">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
